@@ -34,7 +34,7 @@ resource "aws_instance" "nginx_instance" {
               apt install -y docker.io git nginx  # Install Docker, Git, and Nginx
               systemctl enable docker
               systemctl start docker
-              git clone https://github.com/buddy/nginx-config.git /home/ubuntu/nginx-config
+              git clone https://github.com/buddy.git /home/ubuntu/nginx-config
               docker run -d -p 80:80 --name nginx-container -v /home/ubuntu/nginx-config:/etc/nginx/conf.d nginx
               EOF
 
@@ -47,7 +47,7 @@ resource "aws_instance" "nginx_instance" {
   # Provisioners to install software and run Docker
   provisioner "remote-exec" {
     inline = [
-      "git clone https://github.com/buddy/nginx-config.git /home/ubuntu/nginx-config",
+      "git clone https://github.com/buddy.git /home/ubuntu/nginx-config",
       "docker run -d -p 80:80 --name nginx-container -v /home/ubuntu/nginx-config:/etc/nginx/conf.d nginx"
     ]
   }
